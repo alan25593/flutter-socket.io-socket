@@ -9,8 +9,10 @@
 <body>
     <h1>Proximamente</h1>
 
-    <script src="http://localhost:3001/socket.io/socket.io.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 
+<!-- mostrar en consola los datos del server -->
+    
     <script>
         var socket = io();
         socket.on('connect',function(){console.log('Conectado al Servidor');});
@@ -21,8 +23,13 @@
         socket.emit('mensaje',{nombre: 'Alan'});
 
         //hacia todos los usuarios
-        socket.on('mensaje',function(payload){
+        socket.on('nuevo-mensaje',function(payload){
             console.log('Escuchando:', payload);
+        });
+
+        socket.on('active-bands', function(bands){
+            console.clear;
+            console.table(bands);
         });
     </script>
 </body>
